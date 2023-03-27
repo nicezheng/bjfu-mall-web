@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bjfu.BJFU.mall.dao.AddressMapper">
+    <resultMap id="BaseResultMap" type="bjfu.BJFU.mall.entity.Address">
+        <id column="add_id" jdbcType="INTEGER" property="id" />
+        <result column="user_id" jdbcType="INTEGER" property="uid" />
+        <result column="user_name" jdbcType="VARCHAR" property="name" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="address" jdbcType="VARCHAR" property="address" />
+        <result column="dfault" jdbcType="INTEGER" property="dfault" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    add_id,user_id, user_name, phone, address, dfault
+  </sql>
+    <delete id="deleteAddress">
+        delete
+        from tb_sika_mall_address
+        where add_id = #{id,jdbcType=BIGINT}
+
+    </delete>
+
+    <select id="getDefaultAddress" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_sika_mall_address
+        where dfault = 1
+    </select>
+    <select id="findAddressByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_sika_mall_address
+        where user_id = #{userId,jdbcType=BIGINT}
+
+    </select>
+</mapper>
